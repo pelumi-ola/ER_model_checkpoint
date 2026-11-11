@@ -2,6 +2,67 @@
 
 # Entity-Relationship Model (ERM)
 
+
+# Entity-Relationship Model (ERM)
+
+## Entity-Relationship Diagram
+
+```mermaid
+erDiagram
+    GYMNASIUM ||--o{ MEMBER : registers
+    GYMNASIUM ||--o{ SESSION : organizes
+
+    MEMBER ||--o{ REGISTRATION : makes
+    SESSION ||--o{ REGISTRATION : receives
+
+    SESSION ||--o{ SESSION_COACH : has
+    COACH ||--o{ SESSION_COACH : leads
+
+    GYMNASIUM {
+        int Gym_ID PK
+        string Name
+        string Address
+        string Telephone
+    }
+
+    MEMBER {
+        int Member_ID PK
+        string Last_Name
+        string First_Name
+        string Address
+        date Date_of_Birth
+        string Gender
+        int Gym_ID FK
+    }
+
+    SESSION {
+        int Session_ID PK
+        string Sport_Type
+        string Schedule
+        int Max_Capacity
+        int Gym_ID FK
+    }
+
+    COACH {
+        int Coach_ID PK
+        string Last_Name
+        string First_Name
+        int Age
+        string Specialty
+    }
+
+    REGISTRATION {
+        int Registration_ID PK
+        int Member_ID FK
+        int Session_ID FK
+        date Registration_Date
+    }
+
+    SESSION_COACH {
+        int Session_ID PK, FK
+        int Coach_ID PK, FK
+    }
+```
 ## Entities and Attributes
 
 ### GYMNASIUM
@@ -191,3 +252,4 @@ COACH
 3. A session can have maximum 20 members.
 4. A session can be led by maximum 2 coaches.
 5. A coach can lead multiple sessions.
+
